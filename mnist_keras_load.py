@@ -27,4 +27,4 @@ for i in range (num_rows):
         ax[i,j].set_title('No. %d' % sampled_y[image_index])
 
 plt.show()
-plt.close()
+#plt.close()
