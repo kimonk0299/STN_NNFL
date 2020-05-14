@@ -17,7 +17,7 @@ sampled_y = y_train[rand_mine]
 num_rows = 2
 num_cols = 6
 
-f, ax = plt.subplots(num_rows, num_cols, figsize = (12,5), gridspec_kw = {'wspace':0.03 , 'hspace'=0.01}, squeeze = True)
+f, ax = plt.subplots(num_rows, num_cols, figsize = (12,5), gridspec_kw = {'wspace':0.03 , 'hspace':0.01}, squeeze = True)
 
 for i in range (num_rows):
     for j in range (num_cols):
