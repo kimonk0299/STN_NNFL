@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from keras.utils import to_categorical
 
 
 (x_train, y_train) , (x_test, y_test) = load_data()
@@ -27,4 +28,21 @@ for i in range (num_rows):
         ax[i,j].set_title('No. %d' % sampled_y[image_index])
 
 plt.show()
-#plt.close()
+plt.close()
+
+image_height = x_train.shape[1]
+image_width = x_train.shape[2]
+num_channels = 1
+
+train_data = np.reshape(x_train, (x_train.shape[0], image_height, image_width, num_channels))
+test_data = np.reshape(x_test, (x_test.shape[0], image_height, image_width, num_channels))
+
+train_data = train_data.astype('float32')/255.
+test_data = test_data.astype('float32')/255.
+
+num_classes = 10
+train_labels_cat = to_categorical(y_train, num_classes)
+test_labels_cat = to_categorical(y_test, num_classes)
+
+train_labels_cat.shape, test_labels_cat.shape
+
