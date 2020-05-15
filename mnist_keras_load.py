@@ -44,5 +44,6 @@ num_classes = 10
 train_labels_cat = to_categorical(y_train, num_classes)
 test_labels_cat = to_categorical(y_test, num_classes)
 
-train_labels_cat.shape, test_labels_cat.shape
+print(train_labels_cat.shape) 
+print(test_labels_cat.shape)
 
