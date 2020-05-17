@@ -6,7 +6,7 @@ import matplotlib.gridspec as gridspec
 from keras.utils import to_categorical
 
 
-def starter():
+#def starter():
     (x_train, y_train) , (x_test, y_test) = load_data()
 
     np.random.seed(188)
