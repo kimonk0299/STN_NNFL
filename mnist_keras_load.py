@@ -29,7 +29,7 @@ def starter():
             ax[i,j].set_title('No. %d' % sampled_y[image_index])
 
     plt.show()
-    plt.close()
+    #plt.close()
     
     
 
