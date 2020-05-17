@@ -65,4 +65,4 @@ from keras.utils import to_categorical
     train_data_new = train_data[val_count:,:]
     train_labels_cat_new = train_labels_cat[val_count:,:]
 
-    return train_data_new, train_labels_cat_new, val_data, val_labels_cat, test_data, test_labels_cat
+    #return train_data_new, train_labels_cat_new, val_data, val_labels_cat, test_data, test_labels_cat
