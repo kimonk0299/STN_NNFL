@@ -1,9 +1,9 @@
-from keras.datasets.mnist import load_data
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-import matplotlib.gridspec as gridspec
-from keras.utils import to_categorical
+    from keras.datasets.mnist import load_data
+    import numpy as np
+    import matplotlib
+    import matplotlib.pyplot as plt
+    import matplotlib.gridspec as gridspec
+    from keras.utils import to_categorical
 
 
 #def starter():
