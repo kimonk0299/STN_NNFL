@@ -11,7 +11,7 @@ def starter():
 
     np.random.seed(188)
     #vinay, kishre uncomment to see how the dataset looks like
-    '''rand_mine = np.random.randint(0,x_train.shape[0],12)
+    rand_mine = np.random.randint(0,x_train.shape[0],12)
 
     sampled_x = x_train[rand_mine]
     sampled_y = y_train[rand_mine]
@@ -31,7 +31,7 @@ def starter():
     plt.show()
     plt.close()
     
-    ''' 
+    
 
     image_height = x_train.shape[1]
     image_width = x_train.shape[2]
