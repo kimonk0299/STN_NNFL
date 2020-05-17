@@ -6,11 +6,12 @@ import matplotlib.gridspec as gridspec
 from keras.utils import to_categorical
 
 
-(x_train, y_train) , (x_test, y_test) = load_data()
+def starter():
+    (x_train, y_train) , (x_test, y_test) = load_data()
 
     np.random.seed(188)
     #vinay, kishre uncomment to see how the dataset looks like
-    rand_mine = np.random.randint(0,x_train.shape[0],12)
+    '''rand_mine = np.random.randint(0,x_train.shape[0],12)
     sampled_x = x_train[rand_mine]
     sampled_y = y_train[rand_mine]
     num_rows = 2
@@ -25,7 +26,7 @@ from keras.utils import to_categorical
     plt.show()
     plt.close()
     
-    
+    ''' 
 
     image_height = x_train.shape[1]
     image_width = x_train.shape[2]
@@ -59,4 +60,4 @@ from keras.utils import to_categorical
     train_data_new = train_data[val_count:,:]
     train_labels_cat_new = train_labels_cat[val_count:,:]
 
-    #return train_data_new, train_labels_cat_new, val_data, val_labels_cat, test_data, test_labels_cat
+    return train_data_new, train_labels_cat_new, val_data, val_labels_cat, test_data, test_labels_cat
