@@ -1,7 +1,7 @@
 import numpy as np
 from skimage import transform
 from skimage.transform import warp, AffineTransform
-
+import tensorflow as tf
 if tensorflow.__version__ < "1.6.0" and os.environ.get('READTHEDOCS', None) != 'True':
         raise RuntimeError(
             "TensorLayer does not support Tensorflow version older than 1.6.0.\n"
