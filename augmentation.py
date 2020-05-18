@@ -55,7 +55,7 @@ def pad_distort_ims_fn(X):
     return X_40
 
 # create dataset with size of 40x40 with distortion
-def aug_data(X_train,X_val,X_test)
+def aug_data(X_train,X_val,X_test):
     X_train_40 = pad_distort_ims_fn(X_train)
     X_val_40 = pad_distort_ims_fn(X_val)
     X_test_40 = pad_distort_ims_fn(X_test)
