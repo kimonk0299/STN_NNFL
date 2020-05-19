@@ -1,5 +1,5 @@
 def main():
-	train_data, train_label, val_data, val_label, test_data, test_label = starter()
+	'''train_data, train_label, val_data, val_label, test_data, test_label = starter()
 	train_aug,val_aug,test_aug = aug_data(train_data,val_data,test_data)
 	train_sh,train_sh_label,val_sh,val_sh_label,test_sh,test_sh_label = append_shuffle(train_data,train_label,val_data,val_label,test_data,test_label,train_aug,val_aug,test_aug)
 	rand_mine = np.random.randint(0,val_sh.shape[0],12)
@@ -14,4 +14,4 @@ def main():
 			ax[i,j].axis("off")
 			ax[i,j].imshow(np.squeeze(sampled_x[image_index]), cmap='gray')
 			ax[i,j].set_title('No. %d' % np.where(sampled_y[image_index] == 1))
-	plt.show()
+	plt.show()'''
