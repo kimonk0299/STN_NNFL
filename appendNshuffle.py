@@ -7,19 +7,19 @@ def append(train_data,train_label,val_data,val_label,test_data,test_label,train_
 	b = np.zeros((m, 40, 40, 1))
 	o = int((40-28)/2)
 	b[:, o:o+28, o:o+28] = train_data
-	train_data = b
+	train_data = np.squeeze(b)
 	
 	m = np.size(val_data,0)
 	b = np.zeros((m, 40, 40, 1))
 	o = int((40-28)/2)
 	b[:, o:o+28, o:o+28] = val_data
-	val_data = b
+	val_data = np.squeeze(b)
 	
 	m = np.size(test_data,0)
 	b = np.zeros((m, 40, 40, 1))
 	o = int((40-28)/2)
 	b[:, o:o+28, o:o+28] = test_data
-	test_data = b
+	test_data = np.squeeze(b)
 	
 	train_app = np.append(train_data,train_aug,axis=0)
 	val_app = np.append(val_data,val_aug,axis=0)
