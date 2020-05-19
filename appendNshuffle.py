@@ -29,5 +29,22 @@ def append(train_data,train_label,val_data,val_label,test_data,test_label,train_
 	val_appl = np.append(val_label,val_label,axis=0)
 	test_appl = np.append(test_label,test_label,axis=0)
 	
-	return train_app,train_appl,val_app,val_appl,test_app,test_appl
+	m = np.size(train_app,0)
+	permutation = list(np.random.permutation(m))
+	train_sh = train_app[permutation,:,:]
+	train_sh_label = train_appl[permutation,:]
+	
+	m = np.size(val_app,0)
+	permutation = list(np.random.permutation(m))
+	val_sh = val_app[permutation,:,:]
+	val_sh_label = val_appl[permutation,:]
+	
+	m = np.size(test_app,0)
+	permutation = list(np.random.permutation(m))
+	test_sh = test_app[permutation,:,:]
+	test_sh_label = test_appl[permutation,:]
+	
+	
+	
+	return train_sh,train_sh_label,val_sh,val_sh_label,test_sh,test_sh_label
   
