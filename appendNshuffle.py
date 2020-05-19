@@ -2,7 +2,7 @@ import numpy as np
 from skimage import transform
 import tensorflow as tf
 
-def append(train_data,train_label,val_data,val_label,test_data,test_label,train_aug,val_aug,test_aug):
+def append_shuffle(train_data,train_label,val_data,val_label,test_data,test_label,train_aug,val_aug,test_aug):
 	m = np.size(train_data,0)
 	b = np.zeros((m, 40, 40, 1))
 	o = int((40-28)/2)
