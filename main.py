@@ -28,7 +28,7 @@ def main():
 	num_epochs = 100
 	
 	model = STN()
-	model.compile(loss='categorical_crossentropy', optimizer='adam', learning_rate = learning_rate)
+	model.compile(loss='categorical_crossentropy', optimizer='adam', learning_rate = 1e-3)
 	print("network summary")
 	model.summary()
 	
