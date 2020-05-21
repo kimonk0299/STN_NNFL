@@ -47,4 +47,3 @@ def append_shuffle(train_data,train_label,val_data,val_label,test_data,test_labe
 	
 	
 	return train_sh,train_sh_label,val_sh,val_sh_label,test_sh,test_sh_label
-  
