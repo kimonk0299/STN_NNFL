@@ -27,7 +27,7 @@ def main():
 	minibatch_size = 256
 	num_epochs = 100
 	
-	model = STN((40,40,1),(40,40),10))
+	model = STN()
 	model.compile(loss='categorical_crossentropy', optimizer='adam', learning_rate = learning_rate)
 	print("network summary")
 	model.summary()
