@@ -5,7 +5,7 @@ from mnist_keras_load import starter
 from augmentation import aug_data
 from appendNshuffle import append_shuffle
 import numpy as np
-from utils import get_initial_weights,STN
+from utils import get_initial_weights,STN,random_mini_batches
 
 def main():
 	train_data, train_label, val_data, val_label, test_data, test_label = starter()
