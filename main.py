@@ -5,11 +5,13 @@ from mnist_keras_load import starter
 from augmentation import aug_data
 from appendNshuffle import append_shuffle
 import numpy as np
+from utils import get_initial_weights,STN
+
 def main():
 	train_data, train_label, val_data, val_label, test_data, test_label = starter()
 	train_aug,val_aug,test_aug = aug_data(train_data,val_data,test_data)
 	train_sh,train_sh_label,val_sh,val_sh_label,test_sh,test_sh_label = append_shuffle(train_data,train_label,val_data,val_label,test_data,test_label,train_aug,val_aug,test_aug)
-	rand_mine = np.random.randint(0,val_sh.shape[0],12)
+	'''rand_mine = np.random.randint(0,val_sh.shape[0],12)
 	sampled_x = val_sh[rand_mine]
 	sampled_y = val_sh_label[rand_mine].reshape(12,10)
 	num_rows = 2
@@ -21,4 +23,11 @@ def main():
 			ax[i,j].axis("off")
 			ax[i,j].imshow(np.squeeze(sampled_x[image_index]), cmap='gray')
 			ax[i,j].set_title('No. %d' % np.where(sampled_y[image_index] == 1))
-	plt.show()
+	plt.show()'''
+	
+	model = STN()
+	model.compile(loss='categorical_crossentropy', optimizer='adam')
+	print("network summary")
+	model.summary()
+	
+	
