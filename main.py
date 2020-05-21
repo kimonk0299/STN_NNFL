@@ -44,7 +44,7 @@ def main():
 			(minibatch_x,minibatch_y) = minibatch
 			minibatch_x = minibatch_x[:,:,:,np.newaxis]
 			loss = model.train_on_batch(minibatch_x, minibatch_y)
-			if epoch_arg % 10 == 0:
+			if epoch % 10 == 0:
 				val_score = model.evaluate(*val_data, verbose=1)
 				test_score = model.evaluate(*test_data, verbose=1)
 				message = 'Epoch: {0} | Val: {1} | Test: {2}'
