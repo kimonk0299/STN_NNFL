@@ -24,10 +24,40 @@ def main():
 			ax[i,j].imshow(np.squeeze(sampled_x[image_index]), cmap='gray')
 			ax[i,j].set_title('No. %d' % np.where(sampled_y[image_index] == 1))
 	plt.show()'''
+	minibatch_size = 256
+	num_epochs = 100
 	
-	model = STN()
-	model.compile(loss='categorical_crossentropy', optimizer='adam')
+	model = STN((40,40,1),(40,40),10))
+	model.compile(loss='categorical_crossentropy', optimizer='adam', learning_rate = learning_rate)
 	print("network summary")
 	model.summary()
+	
+	m = train_sh.shape[0]
+	
+        for epoch in range(num_epochs):
+		epoch_cost = 0.                       # Defines a cost related to an epoch
+            	num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
+            	minibatches = random_mini_batches(train_sh, train_sh_label, minibatch_size)
+
+            	for minibatch in minibatches:
+			(minibatch_x,minibatch_y) = minibatch
+			loss = model.train_on_batch(minibatch_x, minibatch_y)
+			
+			if epoch_arg % 10 == 0:
+				val_score = model.evaluate(*val_data, verbose=1)
+				test_score = model.evaluate(*test_data, verbose=1)
+				message = 'Epoch: {0} | Val: {1} | Test: {2}'
+				print(message.format(epoch, val_score, test_score))
+				
+			
+			
+
+	
+	
+	
+
+	
+	
+	
 	
 	
