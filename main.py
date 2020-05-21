@@ -31,10 +31,8 @@ def main():
 	model.compile(loss='categorical_crossentropy', optimizer='adam', learning_rate = 1e-3)
 	print("network summary")
 	model.summary()
-	
-	'''m = train_sh.shape[0]
-	
-        for epoch in range(num_epochs):
+	m = train_sh.shape[0]
+	for epoch in range(num_epochs):
 		num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
 		minibatches = random_mini_batches(train_sh, train_sh_label, minibatch_size)
 		
