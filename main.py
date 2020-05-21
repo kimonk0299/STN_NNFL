@@ -6,6 +6,7 @@ from augmentation import aug_data
 from appendNshuffle import append_shuffle
 import numpy as np
 from utils import get_initial_weights,STN,random_mini_batches
+import math
 
 def main():
 	train_data, train_label, val_data, val_label, test_data, test_label = starter()
