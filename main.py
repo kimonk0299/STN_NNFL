@@ -35,6 +35,7 @@ def main():
 	m = train_sh.shape[0]
 	
         for epoch in range(num_epochs):
+		
 		epoch_cost = 0.                       # Defines a cost related to an epoch
 		num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
 		minibatches = random_mini_batches(train_sh, train_sh_label, minibatch_size)
