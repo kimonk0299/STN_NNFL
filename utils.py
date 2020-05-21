@@ -45,18 +45,18 @@ def STN(input_shape=(40, 40), sampling_size=(40, 40), num_classes=10):
     return Model(inputs=image, outputs=x)
 
 def random_mini_batches(X, Y, mini_batch_size = 64):
-    m = X.shape[1]
+    m = X.shape[0]
     mini_batches = []
     num_complete_minibatches = math.floor(m/mini_batch_size)
     
     for k in range(0, num_complete_minibatches):
-        mini_batch_X = X[k * mini_batch_size : k * mini_batch_size + mini_batch_size, :, :]
+        mini_batch_X = X[k * mini_batch_size : k * mini_batch_size + mini_batch_size, :, :, :]
         mini_batch_Y = Y[k * mini_batch_size : k * mini_batch_size + mini_batch_size, :]
         mini_batch = (mini_batch_X, mini_batch_Y)
         mini_batches.append(mini_batch)
        
     if m % mini_batch_size != 0:
-        mini_batch_X = X[num_complete_minibatches * mini_batch_size : m, :, :]
+        mini_batch_X = X[num_complete_minibatches * mini_batch_size : m, :, :, :]
         mini_batch_Y = Y[num_complete_minibatches * mini_batch_size : m, :]
         mini_batch = (mini_batch_X, mini_batch_Y)
         mini_batches.append(mini_batch)
