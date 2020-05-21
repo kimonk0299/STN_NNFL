@@ -19,7 +19,7 @@ def get_initial_weights(output_size):
     weights = [W, b.flatten()]
     return weights
 
-def STN(input_shape=(40, 40), sampling_size=(40, 40), num_classes=10):
+def STN(input_shape=(40, 40, 1), sampling_size=(40, 40), num_classes=10):
     image = Input(shape=input_shape)
     locnet = MaxPool2D(pool_size=(2, 2))(image)
     locnet = Conv2D(20, (5, 5))(locnet)
