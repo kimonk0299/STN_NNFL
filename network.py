@@ -1,36 +1,36 @@
-import tensorflow as tf
+from keras.layers import Input
+from keras.models import Model
+from keras.layers import Activation
+from keras.layers import MaxPool2D
+from keras.layers import Flatten
+from keras.layers import Conv2D
+from keras.layers import Dense
 
-def network(U, theta, out_size=None):
-    num = tf.shape(U)[0]
-    Height = tf.shape(U)[1]
-    Width = tf.shape(U)[2]
-
-    theta_mat = tf.reshape(theta, [num, 2, 3])
-
-    if out_size:
-        out_H = out_size[0]
-        out_W = out_size[1]
-
-        batch_grids = grid_gen(out_H,out_W,theta)
-
-        #complete
-
-def get_pixel_value(img , x, y):
-
-    #should be used for the other dataset
-    shape = tf.shape(x)
-    batch_size = shape[0]
-    height = shape[1]
-    width = shape[2]
-
-    batch_index = tf.range(0, batch_size)
-    batch_index = tf.reshape(batch_index, [batch_size,1,1])
-
-    b = tf.tile(batch_index, (1,height, width))
-
-    indices = tf.stack([b, y, x], 3)
-
-    return tf.gather_nd(img, indices)
+from .utils import get_initial_weights
+from .layers import BilinearInterpolation
 
 
-def grid_gen(height)
+def STN(input_shape=(60, 60, 1), sampling_size=(30, 30), num_classes=10):
+    image = Input(shape=input_shape)
+    locnet = MaxPool2D(pool_size=(2, 2))(image)
+    locnet = Conv2D(20, (5, 5))(locnet)
+    locnet = MaxPool2D(pool_size=(2, 2))(locnet)
+    locnet = Conv2D(20, (5, 5))(locnet)
+    locnet = Flatten()(locnet)
+    locnet = Dense(50)(locnet)
+    locnet = Activation('relu')(locnet)
+    weights = get_initial_weights(50)
+    locnet = Dense(6, weights=weights)(locnet)
+    x = BilinearInterpolation(sampling_size)([image, locnet])
+    x = Conv2D(32, (3, 3), padding='same')(x)
+    x = Activation('relu')(x)
+    x = MaxPool2D(pool_size=(2, 2))(x)
+    x = Conv2D(32, (3, 3))(x)
+    x = Activation('relu')(x)
+    x = MaxPool2D(pool_size=(2, 2))(x)
+    x = Flatten()(x)
+    x = Dense(256)(x)
+    x = Activation('relu')(x)
+    x = Dense(num_classes)(x)
+    x = Activation('softmax')(x)
+    return Model(inputs=image, outputs=x)
