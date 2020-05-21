@@ -32,7 +32,7 @@ def main():
 	print("network summary")
 	model.summary()
 	
-	m = train_sh.shape[0]
+	'''m = train_sh.shape[0]
 	
         for epoch in range(num_epochs):
 		num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
@@ -45,7 +45,7 @@ def main():
 				val_score = model.evaluate(*val_data, verbose=1)
 				test_score = model.evaluate(*test_data, verbose=1)
 				message = 'Epoch: {0} | Val: {1} | Test: {2}'
-				print(message.format(epoch, val_score, test_score))
+				print(message.format(epoch, val_score, test_score))'''
 				
 			
 			
