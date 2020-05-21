@@ -36,13 +36,12 @@ def main():
 	
         for epoch in range(num_epochs):
 		epoch_cost = 0.                       # Defines a cost related to an epoch
-            	num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
-            	minibatches = random_mini_batches(train_sh, train_sh_label, minibatch_size)
-
-            	for minibatch in minibatches:
+		num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
+		minibatches = random_mini_batches(train_sh, train_sh_label, minibatch_size)
+		
+		for minibatch in minibatches:
 			(minibatch_x,minibatch_y) = minibatch
 			loss = model.train_on_batch(minibatch_x, minibatch_y)
-			
 			if epoch_arg % 10 == 0:
 				val_score = model.evaluate(*val_data, verbose=1)
 				test_score = model.evaluate(*test_data, verbose=1)
