@@ -6,6 +6,7 @@ from keras.layers import MaxPool2D
 from keras.layers import Flatten
 from keras.layers import Conv2D
 from keras.layers import Dense
+import math
 
 from bilinear_sampler import BilinearInterpolation
 
