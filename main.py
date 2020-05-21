@@ -33,12 +33,16 @@ def main():
 	print("network summary")
 	model.summary()
 	m = train_sh.shape[0]
+	val_d = val_sh[:,:,:,np.newaxis]
+	test_d = test_sh[:,:,:,np.newaxis]
+	val_data = (val_d,val_sh_label)
+	test_data = (test_d,test_sh_label)
 	for epoch in range(num_epochs):
 		num_minibatches = int(m / minibatch_size) # number of minibatches of size minibatch_size in the train set
 		minibatches = random_mini_batches(train_sh, train_sh_label, minibatch_size)
-		
 		for minibatch in minibatches:
 			(minibatch_x,minibatch_y) = minibatch
+			minibatch_x = minibatch_x[:,:,:,np.newaxis]
 			loss = model.train_on_batch(minibatch_x, minibatch_y)
 			if epoch_arg % 10 == 0:
 				val_score = model.evaluate(*val_data, verbose=1)
