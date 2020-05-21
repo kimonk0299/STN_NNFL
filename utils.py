@@ -7,8 +7,7 @@ from keras.layers import Flatten
 from keras.layers import Conv2D
 from keras.layers import Dense
 
-from .utils import get_initial_weights
-from .layers import BilinearInterpolation
+from .bilinear_sampler import BilinearInterpolation
 
 
 def get_initial_weights(output_size):
@@ -18,3 +17,5 @@ def get_initial_weights(output_size):
     W = np.zeros((output_size, 6), dtype='float32')
     weights = [W, b.flatten()]
     return weights
+
+
