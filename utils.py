@@ -7,7 +7,7 @@ from keras.layers import Flatten
 from keras.layers import Conv2D
 from keras.layers import Dense
 
-from .bilinear_sampler import BilinearInterpolation
+from bilinear_sampler import BilinearInterpolation
 
 
 def get_initial_weights(output_size):
