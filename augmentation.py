@@ -48,7 +48,7 @@ def pad_distort_im_fn(x):
     """
     b = np.zeros((40, 40, 1))
     o = int((40-28)/2)
-    b[:,o:o+28, o:o+28,:] = x
+    b[o:o+28, o:o+28] = x
     x = b
     x = tl.prepro.rotation(x, rg=30, is_random=True, fill_mode='constant')
     x = tl.prepro.shear(x, 0.05, is_random=True, fill_mode='constant')
