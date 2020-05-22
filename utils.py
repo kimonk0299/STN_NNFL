@@ -8,7 +8,7 @@ from keras.layers import Conv2D
 from keras.layers import Dense
 import math
 
-from bilinear_sampler import BilinearInterpolation
+from samplerNinterpolation import sample_interpolate
 
 
 def get_initial_weights(output_size):
@@ -30,7 +30,7 @@ def STN(input_shape=(40, 40, 1), sampling_size=(40, 40), num_classes=10):
     locnet = Activation('relu')(locnet)
     weights = get_initial_weights(50)
     locnet = Dense(6, weights=weights)(locnet)
-    x = BilinearInterpolation(sampling_size)([image, locnet])
+    x = sampleInterpolate(sampling_size)([image, locnet])
     x = Conv2D(32, (3, 3), padding='same')(x)
     x = Activation('relu')(x)
     x = MaxPool2D(pool_size=(2, 2))(x)
