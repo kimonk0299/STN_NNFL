@@ -61,6 +61,7 @@ class sample_interpolate(tf.keras.layers.Layer):
 
 
 	def _grid_gen(self, height, width, theta):
+		#makes grids
 
 		num_batch = tf.shape(theta)[0]
 
