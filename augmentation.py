@@ -38,22 +38,19 @@ def rot_270_deg(X):
     return X_aug
 
 def pad_distort_im_fn(x):
-    """ Zero pads an image to 40x40, and distort it.
-    Examples
-    ---------
-    x = pad_distort_im_fn(X_train[0])
-    print(x, x.shape, x.max())
-    tl.vis.save_image(x, '_xd.png')
-    tl.vis.save_image(X_train[0], '_x.png')
-    """
     b = np.zeros((40, 40, 1))
     o = int((40-28)/2)
     b[o:o+28, o:o+28] = x
     x = b
-    x = tl.prepro.rotation(x, rg=30, is_random=True, fill_mode='constant')
+    """x = tf.keras.preprocessing.image.random_rotation(x, 45, row_axis=0, col_axis=1, channel_axis=2, fill_mode='nearest', cval=0.0,interpolation_order=1)
+    x = tf.keras.preprocessing.image.random_shear(x, 0.05, row_axis=0, col_axis=1, channel_axis=2, fill_mode='nearest',cval=0.0, interpolation_order=1)
+    x = tf.keras.preprocessing.image.random_shift(x, 0.25, 0.25, row_axis=1, col_axis=2, channel_axis=0, fill_mode='nearest',cval=0.0, interpolation_order=1)
+    x = tf.keras.preprocessing.image.random_zoom(x, zoom_range=(0.7,1.2), row_axis=1, col_axis=2, channel_axis=0, fill_mode='nearest',cval=0.0, interpolation_order=1)
+    """
+    x = tl.prepro.rotation(x, rg=45, is_random=True, fill_mode='constant')
     x = tl.prepro.shear(x, 0.05, is_random=True, fill_mode='constant')
     x = tl.prepro.shift(x, wrg=0.25, hrg=0.25, is_random=True, fill_mode='constant')
-    x = tl.prepro.zoom(x, zoom_range=(0.95, 1.05))
+    x = tl.prepro.zoom(x, zoom_range=(0.7, 1.2))
     return x
 
 def pad_distort_ims_fn(X):
