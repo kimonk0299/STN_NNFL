@@ -10,7 +10,6 @@ if tf.__version__ < "1.6.0" and os.environ.get('READTHEDOCS', None) != 'True':
             " - `pip install --upgrade tensorflow-gpu`"
         )
 
-import tensorflow as tf
 import tensorlayer as tl
 from tensorlayer.layers import *
 
