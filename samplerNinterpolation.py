@@ -46,7 +46,7 @@ class sample_interpolate(tf.keras.layers.Layer):
 		width = shape[2]
 
 		batch_index = tf.range(0, batch_size)
-		batch_index = tf.reshape(batch_index, [batch_size,1,1])
+		batch_index = tf.reshape(batch_index, (batch_size,1,1))
 
 		b = tf.tile(batch_index, (1,height, width))
 
