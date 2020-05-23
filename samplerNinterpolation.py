@@ -21,6 +21,7 @@ class sample_interpolate(tf.keras.layers.Layer):
 		return output
 		
 	def _network(self, U, theta, out_size=None):
+		
 		num = tf.shape(U)[0]
 		Height = tf.shape(U)[1]
 		Width = tf.shape(U)[2]
@@ -95,10 +96,10 @@ class sample_interpolate(tf.keras.layers.Layer):
 		max_x = tf.cast(W-1, 'int32')
 		zero = tf.zeros([], dtype='int32')
 
-		x = tf.cast(x, 'float32')
-		y = tf.cast(y, 'float32')
-		x = 0.5 * ((x + 1.0) * tf.cast(max_x-1, 'float32'))
-		y = 0.5 * ((y + 1.0) * tf.cast(max_y-1, 'float32'))
+		x_f = tf.cast(x, 'float32')
+		y_f = tf.cast(y, 'float32')
+		x = 0.5 * ((x_f + 1.0) * tf.cast(max_x-1, 'float32'))
+		y = 0.5 * ((y_f + 1.0) * tf.cast(max_y-1, 'float32'))
 
 		x0 = tf.cast(tf.floor(x), 'int32')
 		x1 = x0 + 1
@@ -115,15 +116,15 @@ class sample_interpolate(tf.keras.layers.Layer):
 		Ic = self._get_pixel_value(img, x1, y0)
 		Id = self._get_pixel_value(img, x1, y1)
 
-		x0 = tf.cast(x0, 'float32')
-		x1 = tf.cast(x1, 'float32')
-		y0 = tf.cast(y0, 'float32')
-		y1 = tf.cast(y1, 'float32')
+		x0_f = tf.cast(x0, 'float32')
+		x1_f = tf.cast(x1, 'float32')
+		y0_f = tf.cast(y0, 'float32')
+		y1_f = tf.cast(y1, 'float32')
 
-		wa = (x1-x) * (y1-y)
-		wb = (x1-x) * (y-y0)
-		wc = (x-x0) * (y1-y)
-		wd = (x-x0) * (y-y0)
+		wa = (x1_f-x) * (y1_f-y)
+		wb = (x1_f-x) * (y-y0_f)
+		wc = (x-x0_f) * (y1_f-y)
+		wd = (x-x0_f) * (y-y0_f)
 
 		wa = tf.expand_dims(wa, axis=3)
 		wb = tf.expand_dims(wb, axis=3)
