@@ -17,10 +17,10 @@ class sample_interpolate(tf.keras.layers.Layer):
 		
 	def call(self, tensors, mask=None):
 		X, transformation = tensors
-		output = self.network(X, transformation, self.output_size)
+		output = self._network(X, transformation, self.output_size)
 		return output
 		
-	def network(self, U, theta, out_size=None):
+	def _network(self, U, theta, out_size=None):
 		num = tf.shape(U)[0]
 		Height = tf.shape(U)[1]
 		Width = tf.shape(U)[2]
@@ -30,20 +30,20 @@ class sample_interpolate(tf.keras.layers.Layer):
 			out_H = out_size[0]
 			out_W = out_size[1]
 
-			batch_grids = self.grid_gen(out_H,out_W,theta_mat)
+			batch_grids = self._grid_gen(out_H,out_W,theta_mat)
 			
 		else:
-			batch_grids = self.grid_gen(Height, Width, theta_mat)
+			batch_grids = self._grid_gen(Height, Width, theta_mat)
 
 		x_s = batch_grids[:, 0, :, :]
 		y_s = batch_grids[:, 1, :, :]
 
-		out_fmap = bilinear_sampler(U, x_s, y_s)
+		out_fmap = self._bilinear_sampler(U, x_s, y_s)
 		return out_fmap
 
         #completed
 
-	def get_pixel_value(self, img , x, y):
+	def _get_pixel_value(self, img , x, y):
 		#should be used for the other dataset
 		shape = tf.shape(x)
 		batch_size = shape[0]
@@ -60,7 +60,7 @@ class sample_interpolate(tf.keras.layers.Layer):
 		return tf.gather_nd(img, indices)
 
 
-	def grid_gen(self, height, width, theta):
+	def _grid_gen(self, height, width, theta):
 
 		num_batch = tf.shape(theta)[0]
 
@@ -86,7 +86,7 @@ class sample_interpolate(tf.keras.layers.Layer):
 
 		return batch_grids
 
-	def bilinear_sampler(self, img, x, y):
+	def _bilinear_sampler(self, img, x, y):
 
 		H = tf.shape(img)[1]
 		W = tf.shape(img)[2]
@@ -109,10 +109,10 @@ class sample_interpolate(tf.keras.layers.Layer):
 		y0 = tf.clip_by_value(y0, zero, max_y)
 		y1 = tf.clip_by_value(y1, zero, max_y)    
 
-		Ia = get_pixel_value(img, x0, y0)
-		Ib = get_pixel_value(img, x0, y1)
-		Ic = get_pixel_value(img, x1, y0)
-		Id = get_pixel_value(img, x1, y1)
+		Ia = self._get_pixel_value(img, x0, y0)
+		Ib = self._get_pixel_value(img, x0, y1)
+		Ic = self._get_pixel_value(img, x1, y0)
+		Id = self._get_pixel_value(img, x1, y1)
 
 		x0 = tf.cast(x0, 'float32')
 		x1 = tf.cast(x1, 'float32')
