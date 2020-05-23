@@ -30,7 +30,7 @@ class sample_interpolate(tf.keras.layers.Layer):
 			out_H = out_size[0]
 			out_W = out_size[1]
 
-			batch_grids = self._grid_gen(out_H,out_W,theta_mat)
+			#batch_grids = self._grid_gen(out_H,out_W,theta_mat)
 			
 		else:
 			batch_grids = self._grid_gen(Height, Width, theta_mat)
