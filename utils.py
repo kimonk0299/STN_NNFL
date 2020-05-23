@@ -79,7 +79,7 @@ def append_shuffle(train_data,train_label,val_data,val_label,test_data,test_labe
 
 	return train_sh,train_sh_label,val_sh,val_sh_label,test_sh,test_sh_label
 
-def plot_imagesNlabels(data, labels)
+def plot_imagesNlabels(data, labels):
 	rand_mine = np.random.randint(0,data.shape[0],12)
 	sampled_x = data[rand_mine]
 	sampled_y = labels[rand_mine].reshape(12,10)
