@@ -1,11 +1,8 @@
 import numpy as np
-from keras.layers import Input
-from keras.models import Model
-from keras.layers import Activation
-from keras.layers import MaxPool2D
-from keras.layers import Flatten
-from keras.layers import Conv2D
-from keras.layers import Dense
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 import math
 
 from samplerNinterpolation import sample_interpolate
@@ -19,30 +16,39 @@ def get_initial_weights(output_size):
     weights = [W, b.flatten()]
     return weights
 
-def STN(input_shape=(40, 40, 1), sampling_size=(40, 40), num_classes=10):
-    image = Input(shape=input_shape)
-    locnet = MaxPool2D(pool_size=(2, 2))(image)
-    locnet = Conv2D(20, (5, 5))(locnet)
-    locnet = MaxPool2D(pool_size=(2, 2))(locnet)
-    locnet = Conv2D(20, (5, 5))(locnet)
-    locnet = Flatten()(locnet)
-    locnet = Dense(50)(locnet)
-    locnet = Activation('relu')(locnet)
+def STN_Model(input_shape=(40, 40, 1), sampling_size=(40, 40), num_classes=10):
+    #Input
+    STN_Input = keras.Input(shape=input_shape, name = 'STN_Input')
+    
+    #Layers for localization network
+    locnet = layers.Conv2D(16, (3,3), activation = 'relu')(STN_Input)
+    locnet = layers.MaxPool2D(pool_size=(2, 2))(locnet)
+    locnet = layers.Conv2D(8, (4,4), activation = 'relu')(locnet)
+    locnet = layers.MaxPool2D(pool_size=(2, 2))(locnet)
+    locnet = layers.Conv2D(20, (5, 5), activation = 'relu')(locnet)
+    locnet = layers.Flatten()(locnet)
+    locnet = layers.Dense(50)(locnet)
+    locnet = layers.Activation('relu')(locnet)
     weights = get_initial_weights(50)
-    locnet = Dense(6, weights=weights)(locnet)
-    x = sampleInterpolate(sampling_size)([image, locnet])
-    x = Conv2D(32, (3, 3), padding='same')(x)
-    x = Activation('relu')(x)
-    x = MaxPool2D(pool_size=(2, 2))(x)
-    x = Conv2D(32, (3, 3))(x)
-    x = Activation('relu')(x)
-    x = MaxPool2D(pool_size=(2, 2))(x)
-    x = Flatten()(x)
-    x = Dense(256)(x)
-    x = Activation('relu')(x)
-    x = Dense(num_classes)(x)
-    x = Activation('softmax')(x)
-    return Model(inputs=image, outputs=x)
+    locnet = layers.Dense(6, weights=weights)(locnet)
+    
+    # Grid generator and bilenear interpolator layer
+    sampler = sample_interpolate(sampling_size)([STN_Input, locnet])
+    
+    # Classification layer
+    classifier = layers.Conv2D(32, (3, 3), padding='same', activation = 'relu')(sampler)
+    classifier = layers.MaxPool2D(pool_size=(2, 2))(classifier)
+    classifier = layers.Conv2D(16, (3, 3), activation = 'relu')(classifier)
+    classifier = layers.MaxPool2D(pool_size=(2, 2))(classifier)
+    classifier = layers.Flatten()(classifier)
+    classifier = layers.Dense(256)(classifier)
+    classifier = layers.Activation('relu')(classifier)
+    classifier = layers.Dense(num_classes)(classifier)
+    classifier_output = layers.Activation('softmax')(classifier)
+    
+    model = keras.Model(inputs=STN_Input, outputs=classifier_output)
+    
+    return model
 
 def random_mini_batches(X, Y, mini_batch_size = 64):
     m = X.shape[0]
