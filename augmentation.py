@@ -46,7 +46,7 @@ def pad_distort_im_fn(x):
     x = tf.keras.preprocessing.image.random_shift(x, 0.25, 0.25, row_axis=1, col_axis=2, channel_axis=0, fill_mode='nearest',cval=0.0, interpolation_order=1)
     x = tf.keras.preprocessing.image.random_zoom(x, zoom_range=(0.7,1.2), row_axis=1, col_axis=2, channel_axis=0, fill_mode='nearest',cval=0.0, interpolation_order=1)
     """
-    x = tl.prepro.rotation(x, rg=270, is_random=False, fill_mode='constant')
+    x = tl.prepro.rotation(x, rg=315, is_random=False, fill_mode='constant')
     x = tl.prepro.rotation(x, rg=90, is_random=True, fill_mode='constant')
     x = tl.prepro.shear(x, 0.05, is_random=True, fill_mode='constant')
     x = tl.prepro.shift(x, wrg=0.25, hrg=0.25, is_random=True, fill_mode='constant')
