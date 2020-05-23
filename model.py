@@ -5,7 +5,7 @@ from tensorflow.keras import layers
 import math
 from samplerNinterpolation import sample_interpolate
 from utils import get_initial_weights
-from layers import sample_interpolate
+
 
 def STN_Model(input_shape=(40, 40, 1), sampling_size=(40, 40), num_classes=10):
 	#Input
